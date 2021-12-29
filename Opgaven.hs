@@ -49,3 +49,6 @@ som' = foldr (+) 0
 even'' x = x `mod` 2 == 0 
 oneven = not . even 
 
+-- Opgave 1.12
+kwadraat x = x*x
+kwadr_1_to_10 = map (kwadraat) [1,2,3,4,5,6,7,8,9,10]

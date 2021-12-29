@@ -99,3 +99,6 @@ oneven n = (not . even) n
 plus a b = a+b
 opvolger :: Integer -> Integer
 opvolger = plus 1 -- is hetzelfde als 'opvolger x = plus 1 x'
+
+-- handig bij map --<> hier de functie= ' functie die 5 ergens mee optelt, wat is nog niet gekenend'
+plus_5 xs = map (plus 5) xs
