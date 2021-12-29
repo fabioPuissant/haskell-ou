@@ -52,3 +52,14 @@ oneven = not . even
 -- Opgave 1.12
 kwadraat x = x*x
 kwadr_1_to_10 = map (kwadraat) [1,2,3,4,5,6,7,8,9,10]
+
+-- Opgave 1.12 
+--  a)
+    -- '(plus 3) (plus 4 5)' de haakjes bij de 1e plus zijn overbodig want functie beschrijving is links associatief 
+    -- dus 'plus 3 (plus 4 5)' gaat ook
+--  b) 
+    -- beide paren haakjes zijn overbodig 
+    -- DUS 'sqrt (3) + (sqrt 4)' kan worden 'sqrt 3 + sqrt 4'
+--  c)
+    -- Het 2e paar haakjes is overbodig, want '->' expressies zijn rechts associatief
+    -- DUS '(a->b) -> (c->d)' kan worden 'a-> b -> c -> d'
