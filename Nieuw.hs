@@ -102,3 +102,48 @@ opvolger = plus 1 -- is hetzelfde als 'opvolger x = plus 1 x'
 
 -- handig bij map --<> hier de functie= ' functie die 5 ergens mee optelt, wat is nog niet gekenend'
 plus_5 xs = map (plus 5) xs
+
+square' x = x*x
+squares' xs = map (square') xs
+square_sum xs = foldr (+) 0 (squares' xs) 
+
+-- currying examples
+add' :: Int -> (Int -> Int)
+add' = (\x -> (\y -> x+y)) -- dit is een lambda
+doubleList = map (\x -> 2*x) -- sinds map al een argument van lijst heeft is dit impliciet afgeleid en dus noet te vermelden
+
+-- 6.7 Type definities
+    -- type Punt = (Float, Float)
+    -- ':type Punt' => (Float, Float) // is dus geen data structuur opzich maar net een alias voor een lijst, tuple
+    -- String => [Char] is een alias (afkorting) voor een lijst van Char elementen
+
+
+-- 7.1 Datadeclaraties
+-- Voorbeeld data declaratie:
+data Boom a = Leeg                          -- Leeg en Splits zijn constuctor functies (herken ==> staten met Hoofdletter)
+            | Splits a (Boom a) (Boom a)    -- hier heeft '|' de betekenis 'of'
+-- Lezen als:
+    -- "Een boom met elementen 'a' kan op 2 manieren opgebouwd worden: door 1) de functie Leeg te gebruiken, of 2) de functie Splits toe te passen op 3 parameters"
+-- constructor functies zijn Functie waarmee de (nieuwe) datastructuur wordt opgebouwd, vaak recursief.
+
+
+-- 7.2 Functies op bomen
+-- vb Boom aanmaken die op p. 6 staat
+-- gestructuureerde Layout
+b1 = Splits 4 ( Splits 2 
+                (Splits 1 Leeg Leeg )
+                (Splits 3 Leeg Leeg )
+         )
+         ( Splits 6
+                (Splits 5 Leeg Leeg)
+                (Splits 7 Leeg Leeg)
+         )
+b2 = Splits 4 (Splits 2(Splits 1 Leeg Leeg) (Splits 3 Leeg Leeg )) (Splits 6(Splits 5 Leeg Leeg) (Splits 7 Leeg Leeg))
+
+-- List Comprehension
+example = [x^2 | x <- [1..5]]   -- geef de lijst  [1,4,9,16,25]  
+                                -- x <- [..] is een generator!
+example2 = [(x,y) | x <- [1..5], y <-[4,5]]  -- [(1,4),(1,5),(2,4),(2,5),(3,4),(3,5),(4,4),(4,5),(5,4),(5,5)] = KARTHESISH PRODUCT
+
+-- 7.3 Data declaraties voor speciale types
+

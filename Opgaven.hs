@@ -46,14 +46,14 @@ som xs = foldr (+) 0 xs
 som' = foldr (+) 0
 
 -- Opgave 1.11
-even'' x = x `mod` 2 == 0 
+even' x = x `mod` 2 == 0 
 oneven = not . even 
 
 -- Opgave 1.12
 kwadraat x = x*x
 kwadr_1_to_10 = map (kwadraat) [1,2,3,4,5,6,7,8,9,10]
 
--- Opgave 1.12 
+-- Opgave 1.14
 --  a)
     -- '(plus 3) (plus 4 5)' de haakjes bij de 1e plus zijn overbodig want functie beschrijving is links associatief 
     -- dus 'plus 3 (plus 4 5)' gaat ook
@@ -63,3 +63,17 @@ kwadr_1_to_10 = map (kwadraat) [1,2,3,4,5,6,7,8,9,10]
 --  c)
     -- Het 2e paar haakjes is overbodig, want '->' expressies zijn rechts associatief
     -- DUS '(a->b) -> (c->d)' kan worden 'a-> b -> c -> d'
+
+-- Opgave 1.15 
+oneven' n = (.) not even' n
+oneven'' = (.) not even'
+
+-- Opgave 1.16
+data Boom a = Leeg | Splits a (Boom a) (Boom a) 
+
+somBoom :: Boom Int -> Int
+somBoom Leeg = 0 
+somBoom (Splits n lBoom rBoom) = n + somBoom lBoom
+                                   + somBoom rBoom
+-- Aanroepen 
+--   somBoom (Splits 5 (Splits 8 (Splits 7 Leeg Leeg) (Splits 10 Leeg Leeg)) (Splits 4 Leeg Leeg))
