@@ -145,5 +145,34 @@ example = [x^2 | x <- [1..5]]   -- geef de lijst  [1,4,9,16,25]
                                 -- x <- [..] is een generator!
 example2 = [(x,y) | x <- [1..5], y <-[4,5]]  -- [(1,4),(1,5),(2,4),(2,5),(3,4),(3,5),(4,4),(4,5),(5,4),(5,5)] = KARTHESISH PRODUCT
 
+
 -- 7.3 Data declaraties voor speciale types
 
+-- Enums (opsommingstypes)      => De constructor functies dienen dan als constanten om de elementen uit de enum aan te duiden
+data Color = Yellow | Red | Blue
+data Richting = Noord | Oost | Zuid | West
+-- Voorbeeld
+stap :: Richting -> (Int, Int) -> (Int, Int)
+stap Noord (x,y) = (x, y+1)
+stap Oost (x,y) = (x+1, y)
+stap Zuid (x,y) = (x, y-1)
+stap West (x,y) = (x-1, y)
+
+-- disjunctie vereniging van types
+-- kunnen m.b.v. 'data' data types verenigen Voorbeeld: Gemengde lijst
+data IntOrChar = EenInt Int | EenChar Char -- deriving (Show)  -- om auto te tonen in winhugs 'deriving (Show)'
+-- Nu kan je iets doen als:
+example_mixed_list :: [IntOrChar]
+example_mixed_list = [EenInt 1, EenChar 'c', EenInt 3]
+
+--custom tonen van nieuw data type
+showIntOrChar :: IntOrChar -> String
+showIntOrChar (EenInt a) = show a 
+showIntOrChar (EenChar a) = a:[]
+instance Show IntOrChar where
+    show = showIntOrChar
+
+-- Is Even
+isEven n = if m > 1 then isEven(m-2) else m==0
+    where m = abs n
+isEven' (n) = n > 0 && isEven' (n-2) || n == 0 
