@@ -1,4 +1,5 @@
 module Herhaling where
+import Hugs.Trex
 signum x    | x > 0         = 1
             | x == 0        = 0
             | otherwise     = -1
@@ -47,3 +48,27 @@ showAnniversary (Birthday name year month day) =
    name ++ " born " ++ showDate year month day
 showAnniversary (Wedding name1 name2 year month day) =
    name1 ++ " married " ++ name2 ++ " on " ++ showDate year month day
+
+concatl [] ys = ys
+concatl (x:xs) ys = x : (concatl xs ys)
+
+concatr xs [] = xs
+concatr xs (y:ys) = y : (concatr xs ys)
+
+data AorB = A Int | B Integer | C Char | F Float | S String deriving Show
+type MixedList = [AorB]
+
+getMixedListOf :: AorB -> AorB -> MixedList
+getMixedListOf a b = [a,b]
+
+hhead :: [a] -> a
+hhead (x:xs) = x
+
+ttail :: [a] -> [a]
+ttail (x:xs) = xs
+
+doThis :: (a->a) -> [a] -> [a]
+doThis f [] = []
+doThis f (x:xs) = f x : (doThis f xs)
+
+minner a = -a 
