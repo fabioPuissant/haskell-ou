@@ -1,5 +1,5 @@
 module Herhaling where
-import Hugs.Trex
+-- import Hugs.Trex
 signum x    | x > 0         = 1
             | x == 0        = 0
             | otherwise     = -1
@@ -70,5 +70,38 @@ ttail (x:xs) = xs
 doThis :: (a->a) -> [a] -> [a]
 doThis f [] = []
 doThis f (x:xs) = f x : (doThis f xs)
-
 minner a = -a 
+
+-- toString :: a -> String
+toString a = show a ++ ""
+
+-- Folding
+-- Link (https://www.youtube.com/watch?v=QHzRZpjycw0)
+sumRange :: Integer -> Integer ->Integer
+sumRange x y = foldr (+) 0 [x..y]
+
+factori :: Integer -> Integer
+factori 1 = 1
+factori x = foldr (*) 1 [1..x]
+
+data Set a = Empty | Sing a | Union (Set a) (Set a) deriving Show
+
+foldSet:: b-> (a->b) -> (b->b->b) -> Set a -> b
+foldSet empty sing uninon Empty  = empty
+foldSet e s u (Sing x)          = s x
+foldSet e s u (Union x y)       = (foldSet e s u x) `u` (foldSet e s u y)
+
+isIn :: (Eq a) => a -> Set a -> Bool
+isIn x =  foldSet False (==x) (||)
+
+testSet = Union (Sing 1) (Union (Sing 2) Empty)
+
+---------
+revList :: [a] -> [a]
+revList xs = foldl (\ acc x-> x : acc) [] xs
+
+len' xs = foldr (\ acc x ->  (+) x 1 ) 0 xs
+
+isEven :: Integer -> Bool
+isEven x = x `mod` 2 == 0
+evenOnly xs = foldr (\ elem  arr -> if (isEven elem) then elem:arr else arr) [] xs 
