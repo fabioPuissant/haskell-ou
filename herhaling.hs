@@ -98,10 +98,11 @@ testSet = Union (Sing 1) (Union (Sing 2) Empty)
 
 ---------
 revList :: [a] -> [a]
-revList xs = foldl (\ acc x-> x : acc) [] xs
+revList xs = foldl (\ arr elem-> elem : arr) [] xs
 
 len' xs = foldr (\ acc x ->  (+) x 1 ) 0 xs
 
 isEven :: Integer -> Bool
 isEven x = x `mod` 2 == 0
 evenOnly xs = foldr (\ elem  arr -> if (isEven elem) then elem:arr else arr) [] xs 
+evenOnly' xs = foldl (\ elem  arr -> if (isEven elem) then elem:arr else arr) [] xs 
