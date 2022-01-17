@@ -105,4 +105,5 @@ len' xs = foldr (\ acc x ->  (+) x 1 ) 0 xs
 isEven :: Integer -> Bool
 isEven x = x `mod` 2 == 0
 evenOnly xs = foldr (\ elem  arr -> if (isEven elem) then elem:arr else arr) [] xs 
-evenOnly' xs = foldl (\ elem  arr -> if (isEven elem) then elem:arr else arr) [] xs 
+-- in omgekeerde volgorde
+evenOnly' xs = foldl (\ arr  elem -> if (isEven elem) then elem:arr else arr) [] xs 

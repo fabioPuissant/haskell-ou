@@ -33,3 +33,15 @@ firstElem (Cons i rest) = i
 sumList :: IntList -> Int
 sumList Nil = 0
 sumList (Cons elem rest) = elem + (sumList rest)
+
+
+-- Opdracht 2.9
+-- a)
+twoTimes :: [Integer] -> [Integer]
+twoTimes = map(2*)
+
+twoTimes' :: [Integer] -> [Integer]
+twoTimes' xs = [x*2 | x <- xs]
+-- b)
+largest :: [Integer] -> Integer
+largest =  foldr max 0
