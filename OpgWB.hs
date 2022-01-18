@@ -76,3 +76,6 @@ plus_6 x = telOp 6 y -- de 6 wordt ingevuld voor y in de lamda, het arugment x w
 mijnFunc :: Bool -> (Int -> Int)
 mijnFunc b  | b         = (telOp 1)
             | otherwise = (telOp -1)
+-- Gebruik van mijnFun
+    -- (mijnFunc True) 2 // het geen tussen haakjes returns een functie telOp 1 y, deze y waarde wordt nu gevuld met 2
+    -- (mijnFunc False) 2 // het geen tussen haakjes returns een functie telOp -1 y, deze y waarde wordt nu gevuld met 2 
