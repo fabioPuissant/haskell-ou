@@ -45,3 +45,30 @@ twoTimes' xs = [x*2 | x <- xs]
 -- b)
 largest :: [Integer] -> Integer
 largest =  foldr max 0
+
+
+-- Opdracht 3.3 (nested-block structure in Haskell)
+nested x y = g (x+y)
+    where g u = u*u
+
+diff f = f' 
+    where f' x = (f (x + h) - f x) / h
+            where h = 0.001
+-- Voobeeld van flat blok structure  in Haskell
+addOne x = x+1
+addTwo y = y+2
+addThree z = addTwo(addOne z)
+
+
+-- Opdracht 3.4 (toon aan dat Haskell statische scoping heeft)
+s = 3
+add i = i + s
+m = add 10
+    where s = 1
+
+--closure in Haskell
+telOp :: Int -> (Int -> Int)
+telOp y = \x -> x+y     -- \x -> x+y is een lambda functie
+plus_5 x = telOp 5 y
+plus_4 x = telOp 4 y
+plus_6 x = telOp 6 y -- de 6 wordt ingevuld voor y in de lamda, het arugment x wordt door gegeven aan de lambda

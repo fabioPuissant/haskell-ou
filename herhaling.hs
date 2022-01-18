@@ -107,3 +107,26 @@ isEven x = x `mod` 2 == 0
 evenOnly xs = foldr (\ elem  arr -> if (isEven elem) then elem:arr else arr) [] xs 
 -- in omgekeerde volgorde
 evenOnly' xs = foldl (\ arr  elem -> if (isEven elem) then elem:arr else arr) [] xs 
+
+-- k+1 pattern testing
+ktest :: Int -> [Int]
+ktest 0 = 0 : []
+ktest (k+2) = (ktest k) ++ [2]
+ktest (k+1) = (ktest k) ++ [1]
+
+ktest' :: Int -> [Int]
+ktest' 0 = 0 : []
+ktest' (k+2) = 1: ktest k
+ktest' (k+1) = 2: ktest k
+
+_ktest :: Int -> [Int]
+_ktest 0 = 0 : []
+_ktest (k+2) = k: ktest k
+_ktest (k+1) = k: ktest k
+
+_ktest' :: Int -> [Int]
+_ktest' 0 = 0 : []
+_ktest' (k+2) = (ktest k) ++ [k]
+_ktest' (k+1) = (ktest k) ++ [k]
+
+
