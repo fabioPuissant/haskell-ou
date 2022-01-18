@@ -100,7 +100,7 @@ testSet = Union (Sing 1) (Union (Sing 2) Empty)
 revList :: [a] -> [a]
 revList xs = foldl (\ arr elem-> elem : arr) [] xs
 
-len' xs = foldr (\ acc x ->  (+) x 1 ) 0 xs
+len' xs = foldr (\ x acc ->  (+) acc 1 ) 0 xs
 
 isEven :: Integer -> Bool
 isEven x = x `mod` 2 == 0
@@ -130,3 +130,22 @@ _ktest' (k+2) = (ktest k) ++ [k]
 _ktest' (k+1) = (ktest k) ++ [k]
 
 
+leng :: [a] -> Int
+leng  [] = 0
+leng (x:xs) = 1 + leng xs
+leng' :: [a] -> Int
+leng' = foldr (\x acc -> (+) acc 1) 0 
+
+sumFold :: [Int] -> Int
+sumFold = foldr (+) 0
+
+sumRange':: Int -> Int -> Int
+sumRange' x y = foldr (+) 0 [x..y]
+
+data Tree a = Knoop a (Tree a) (Tree a) | Empt deriving Show
+sumIntTree :: Tree Int -> Int
+sumIntTree Empt = 0
+sumIntTree (Knoop x leftChild rightChild) = x + ((sumIntTree leftChild) + (sumIntTree rightChild))
+
+getIntTree :: Tree Int
+getIntTree = Knoop 1 (Knoop 2 (Knoop 4 (Knoop 5 Empt Empt) Empt) Empt) (Knoop 3 (Knoop 6 (Knoop 7 Empt Empt) Empt) Empt)
