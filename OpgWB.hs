@@ -72,3 +72,7 @@ telOp y = \x -> x+y     -- \x -> x+y is een lambda functie
 plus_5 x = telOp 5 y
 plus_4 x = telOp 4 y
 plus_6 x = telOp 6 y -- de 6 wordt ingevuld voor y in de lamda, het arugment x wordt door gegeven aan de lambda
+
+mijnFunc :: Bool -> (Int -> Int)
+mijnFunc b  | b         = (telOp 1)
+            | otherwise = (telOp -1)
